@@ -151,7 +151,10 @@ internal fun JvmCompilationTask.kaptArgs(
       "stubs" to listOf(directories.stubs),
       "incrementalData" to listOf(directories.incrementalData),
       "javacArguments" to listOf(javacArgs.let(::encodeMap)),
-      "correctErrorTypes" to listOf("false"),
+
+      // Correct error types to help with dagger annotation processing debugging.
+      // Also see https://github.com/bazelbuild/rules_kotlin/issues/804
+      "correctErrorTypes" to listOf("true"),
       "verbose" to listOf(context.whenTracing { "true" } ?: "false"),
       "apclasspath" to inputs.processorpathsList,
       "aptMode" to listOf(aptMode),
